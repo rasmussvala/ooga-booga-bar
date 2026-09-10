@@ -1,0 +1,44 @@
+name: Build WebGL
+
+# Not on every push: a WebGL build is ~15-25 min of runner time.
+# Run it by hand, or tag a release (git tag v0.1.0 && git push --tags),
+# then download the artifact and upload it to itch.
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+concurrency:
+  group: build-webgl
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          lfs: true
+
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-webgl-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: |
+            Library-webgl-
+            Library-
+
+      - uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          unityVersion: 6000.6.0f1
+          targetPlatform: WebGL
+          buildName: ooga-booga-bar
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: webgl-build
+          path: build/WebGL
