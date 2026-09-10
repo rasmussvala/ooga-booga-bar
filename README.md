@@ -31,14 +31,14 @@ Code outside `Assets/Scripts/` lands in `Assembly-CSharp` and the tests cannot s
 
 ## Checks
 
-CI runs project hygiene on every PR, tests on every PR, and a WebGL build on demand.
+CI runs project hygiene and tests on every PR.
 Run the hygiene checks locally before pushing:
 
 ```bash
 ./scripts/check-project.sh
 ```
 
-The test and build workflows need three repository secrets
+The test workflow needs three repository secrets
 (Settings > Secrets and variables > Actions):
 
 - `UNITY_EMAIL`, `UNITY_PASSWORD` — the Unity account
