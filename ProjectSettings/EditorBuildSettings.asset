@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Johans Mapp/Johans Scene.unity
     guid: bf67333ee3acdb24f965d3512d5e6f25
+  - enabled: 1
+    path: Packages/com.unity.multiplayer.getting-started.casual/Example.unity
+    guid: 94659d20428b566959ae961951f03a7c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
